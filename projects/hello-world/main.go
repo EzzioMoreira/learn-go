@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"strconv"
+)
 
 // Golang não é orientado a objetos, mas é possível criar estruturas e métodos para simular o comportamento de classes e objetos.
 type Person struct {
@@ -41,6 +45,68 @@ func main() {
 	person.addSalaryPersonStruct(50)
 	fmt.Println("Name:", person.fullName, "-", "Salary:", person.salary)
 	fmt.Println("")
+
+	fmt.Println("-----------------------------------------------------------")
+	fmt.Println("Arrays and Slices")
+	salaryArrays := []int{1000, 2000, 3000} // array com 3 elementos
+	//salaryArrays := make([]int, 3)            // é possível criar um array utilizando a função make
+	// Array com tamanho fixo, não é possível adicionar ou remover elementos
+	for i := 0; i < len(salaryArrays); i++ {
+		salaryArrays[i] = 100 + i
+	}
+	for _, salaryArry := range salaryArrays {
+		fmt.Println("Salary:", salaryArry)
+	}
+	// Slice sem tamanho fixo, é possível adicionar ou remover elementos utilizando a função append
+	fmt.Println("")
+	fmt.Println("Array with append")
+	salaryAppend := []int{}
+	for i := 0; i < 5; i++ {
+		salaryAppend = append(salaryAppend, 100+i)
+		//fmt.Println("Salary Append:", salaryAppend)
+	}
+	for _, SalasalaryAppend := range salaryAppend {
+		fmt.Println("Salary Append:", SalasalaryAppend)
+	}
+	fmt.Println("")
+
+	fmt.Println("-----------------------------------------------------------")
+	fmt.Println("Maps")
+	// Map é uma coleção de pares chave-valor, onde as chaves são únicas e os valores podem ser de qualquer tipo.
+	personMap := make(map[string]int) // cria um map vazio
+	personMap["Francisco"] = 30       // adiciona um par chave-valor ao map
+	personMap["Maria"] = 25           // adiciona outro par chave-valor ao map
+	for name, age := range personMap {
+		fmt.Printf("Name: %s, Age: %d\n", name, age)
+	}
+	// Acessa o valor do map utilizando a chave e verifica se a chave existe
+	sal, exists := personMap["Francisco"]
+	fmt.Println("Salary Francisco:", sal, "Exists:", exists)
+
+	fmt.Println("-----------------------------------------------------------")
+	fmt.Println("Tratando Erros")
+	// Em Go, os erros são tratados como valores, e a convenção é retornar um valor de erro como o último valor de uma função.
+	if len(os.Args) != 2 { // verifica se o número de argumentos é diferente de 2
+		os.Exit(1)
+	}
+	n, err := strconv.Atoi(os.Args[1]) // converte o argumento para um inteiro utilizando a função Atoi do pacote strconv
+
+	if err != nil {
+		fmt.Println("Error converting string to int:", err)
+		os.Exit(1)
+	}
+	fmt.Println("Converted number:", n)
+	fmt.Println("")
+
+	fmt.Println("-----------------------------------------------------------")
+	fmt.Println("Defer")
+	file, err := os.Open("file.txt") // abre um arquivo utilizando a função Open do pacote os
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return
+	}
+	defer file.Close() // garante que o arquivo será fechado quando a função main terminar, mesmo que ocorra um erro
+
 }
 
 // Utiliza o * para acessar o valor
