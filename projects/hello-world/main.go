@@ -27,10 +27,6 @@ func main() {
 	fmt.Println("Hello,", firstName, lastName, "your salary is", newSalary, "and your bonus is", bonus)
 
 	fmt.Println("-----------------------------------------------------------")
-	fmt.Println("Print the pointer example")
-	ponteiro()
-
-	fmt.Println("-----------------------------------------------------------")
 	fmt.Println("Print the person struct")
 	fmt.Printf("Name: %s, Age: %d, Salary: %d\n", person.fullName, person.age, person.salary)
 	fmt.Println(person)
@@ -107,6 +103,16 @@ func main() {
 	}
 	defer file.Close() // garante que o arquivo será fechado quando a função main terminar, mesmo que ocorra um erro
 
+	fmt.Println("-----------------------------------------------------------")
+	fmt.Println("Print the pointer example")
+	ponteiro()
+	// Ponteiros são usados para passar referências a valores em vez de copiar os valores.
+	var inteiro = 42
+	var ponteiro *int = &inteiro // utiliza o operador & para obter o endereço de inteiro e atribui a ponteiro
+	fmt.Println("Valor do inteiro:", inteiro)
+	fmt.Println("Endereço do inteiro:", ponteiro)
+	fmt.Println("Valor apontado por ponteiro:", *ponteiro) // utiliza o operador * para acessar o valor apontado por ponteiro
+	fmt.Println("Exemplo 2: Ponteiros")
 }
 
 // Utiliza o * para acessar o valor
